@@ -13,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.mockito.Mockito.*;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,8 +36,8 @@ public class AdaptaterWebTest {
 
     @Test
     public void testMangaController() throws Exception{
-        Manga.add(new Manga(1, "Jujutsu Kaisen", "Lui", new Date("02 Feb 1996"), "Glenat"));
-        Manga.add(new Manga(2, "DemonSlayer", "Lui", new Date("02 Feb 2005"), "Kaze"));
+        Manga.add(new Manga(1, "Jujutsu Kaisen", 1,"Lui", LocalDate.of(2010,03,24), "Synopsis", 2.50F, false));
+        Manga.add(new Manga(2, "DemonSlayer", 5,"Lui", LocalDate.of(2010,03,24), "Synopsis", 3.50F, true));
 
         Mockito.when(mangaListUseCase.getMangaList()).thenReturn(Manga);
 

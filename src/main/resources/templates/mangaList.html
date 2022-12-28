@@ -1,12 +1,176 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test MVC</title>
+        <title>MangaKaka</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--enable mobile device-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--fontawesome css-->
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <!--bootstrap css-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!--animate css-->
+    <link rel="stylesheet" href="/css/animate-wow.css">
+    <!--main css-->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/css/slick.min.css">
+    <link rel="stylesheet" href="/css/select2.min.css">
+    <!--responsive css-->
+    <link rel="stylesheet" href="/css/responsive.css">
 </head>
 <body>
+<header id="header" class="top-head">
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-sm-12 left-rs">
+                    <div class="navbar-header">
+                        <button type="button" id="top-menu" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="/" class="navbar-brand"><img src="/images/Kim-Jong-un-PNG-Pic-Clip-Art-Background.png" alt="" /></a>
+                    </div>
+                    <!--<form class="navbar-form navbar-left web-sh">
+                        <div class="form">
+                            <input type="text" class="form-control" placeholder="Search for products or companies">
+                        </div>
+                    </form>-->
+                </div>
+                <div class="col-md-8 col-sm-12">
+                    <div class="right-nav">
+                        <div class="login-sr">
+                            <div class="login-signup">
+                                <ul>
+                                    <li th:if="${user?.get('name') == 'maxime.rossbach@std.heh.be'}"><a href="/addmanga">Ajouter</a></li>
+                                    <li th:if="${user?.get('name') == 'axel.hoffmann@std.heh.be'}"><a href="/addmanga">Ajouter</a></li>
+                                    <li sec:authorize="!isAuthenticated()"><a th:href="@{/oauth2/authorization/auth0}">Login</a></li>
+                                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Déconnexion</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.container-fluid -->
+    </nav>
+</header>
+<div class="terms-conditions product-page">
+    <div class="terms-title">
+    </div>
+</div>
+<div th:each="manga : ${mangas}" class="product-page-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="prod-page-title">
+                    <h2 th:text="${manga.getNom}"></h2>
+                    <p>By <span th:text="${manga.getAuteur}"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-7 col-sm-8">
+                <div class="md-prod-page">
+                    <div class="md-prod-page-in">
+                        <div class="page-preview">
+                            <div class="preview">
+                                <div class="preview-pic tab-content">
+                                    <div class="tab-pane active" id="pic-1"><img src="/images/Hunter-X-Hunter.jpg" alt="#" /></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-dit-list clearfix">
+                            <div class="left-dit-p">
+                                <div class="prod-btn">
+                                    <a th:if="${user?.get('name') == 'maxime.rossbach@std.heh.be'}" th:href="@{modify(id=${manga.getId})}"><i class="fa fa-star" aria-hidden="true"></i> Modifier</a>
+                                    <a th:if="${user?.get('name') == 'axel.hoffmann@std.heh.be'}" th:href="@{modify(id=${manga.getId})}"><i class="fa fa-star" aria-hidden="true"></i> Modifier</a>
+                                    <a onclick="return confirm('Voulez vous supprimer ?')" th:if="${user?.get('name') == 'maxime.rossbach@std.heh.be'}" th:href="@{delete(id=${manga.getId})}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Supprimer</a>
+                                    <a onclick="return confirm('Voulez vous supprimer ?')" th:if="${user?.get('name') == 'axel.hoffmann@std.heh.be'}" th:href="@{delete(id=${manga.getId})}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description-box">
+                        <div class="dex-a">
+                            <h4>Synopsis</h4>
+                            <p th:text="${manga.getSynopsis}">
+                            </p>
+                            <p th:text="${manga.isShop()}"></p>
+                            <br>
+
+                        </div>
+                        <div class="spe-a">
+                            <h4>Specifications</h4>
+                            <ul>
+                                <li class="clearfix">
+                                    <div class="col-md-4">
+                                        <h5>Tome</h5>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p th:text="${manga.getNb_tome}"></p>
+                                    </div>
+                                </li>
+                                <li class="clearfix">
+                                    <div class="col-md-4">
+                                        <h5>Année d'édition</h5>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p th:text="${manga.getAn}"></td></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <div class="price-box-right">
+                    <h4>Prix</h4>
+                    <h3 th:text="'€' + ${manga.getPrice} "></h3>
+
+                    <a th:href="@{acheter(id=${manga.getId}, shop=${manga.isShop})}">Achat</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    <div class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-link-box clearfix">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="right-f-box">
+                            <h2>Contact</h2>
+                            <ul class="col-sm-4">
+                                <li><a href="#">MAIL</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--main js-->
+<script src="/js/jquery-1.12.4.min.js"></script>
+<!--bootstrap js-->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/select2.full.min.js"></script>
+<script src="/js/wow.min.js"></script>
+<!--custom js-->
+<script src="/js/custom.js"></script>
 </body>
 </html>

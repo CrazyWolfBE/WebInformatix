@@ -2,9 +2,9 @@ package heh.group.maxel.chingchanchong.port.in;
 
 import heh.group.maxel.chingchanchong.model.Manga;
 
-import java.util.List;
+public interface ModifyMangaUser {
 
-public interface MangaListUseCase {
+    Manga getMangaByID(int id);
 
-    List<Manga> getMangaList();
+    void updateManga(Manga manga);
 }

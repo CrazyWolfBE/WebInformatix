@@ -2,9 +2,7 @@ package heh.group.maxel.chingchanchong.port.in;
 
 import heh.group.maxel.chingchanchong.model.Manga;
 
-import java.util.List;
+public interface AddShop {
 
-public interface MangaListUseCase {
-
-    List<Manga> getMangaList();
+    void addShopDB(int id);
 }

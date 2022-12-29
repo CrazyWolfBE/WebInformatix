@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public interface MangaRepository extends JpaRepository<MangaJpaEntity, Integer> {
-
 }

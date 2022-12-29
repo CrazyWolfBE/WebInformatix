@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart UI</title>
+    <link rel="stylesheet" type="text/css" href="/css/shop.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,900" rel="stylesheet">
+</head>
+<body>
+<div class="CartContainer">
+    <header class="accueil">
+        <a href="/">Accueil</a>
+    </header>
+    <div class="Header">
+        <h3 class="Heading">Panier</h3>
+    </div>
+
+    <div class="Cart-Items" th:each="manga : ${mangas} " th:if="${manga.isShop} == true">
+        <div class="about">
+            <h1 class="title" th:text="${manga.getNom} + ' par ' +  ${manga.getAuteur}"></h1>
+            <h3 class="subtitle" th:text="'Tome ' + ${manga.getNb_tome}"></h3>
+        </div>
+        <div class="prices">
+            <div class="amount" th:text="${manga.getPrice} + '€' "></div>
+            <div class="remove"><a th:href="@{enlever(id=${manga.getId})}">Supprimer</a></div>
+        </div>
+    </div>
+    <hr>
+    <div class="checkout">
+        <div class="total">
+            <div>
+                <div class="Subtotal">Total</div>
+            </div>
+            <div class="total-amount"></div>
+        </div>
+    </div>
+</div>
+<script>
+    const getPrices = document.querySelectorAll(".amount");
+    let total = 0;
+    for(let i = 0; i < getPrices.length ; i++){
+        total = total + getPrices[i].textContent.split("€")[0]
+    }
+    console.log(total.toString())
+    const amount = document.querySelector(".total-amount");
+    console.log(amount.text)
+
+    amount.innerHTML = total.toString() + "€"
+
+    console.log(amount.text)
+</script>
+</body>
+</html>

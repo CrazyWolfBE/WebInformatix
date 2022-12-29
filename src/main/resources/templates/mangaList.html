@@ -47,6 +47,7 @@
                         <div class="login-sr">
                             <div class="login-signup">
                                 <ul>
+                                    <li><a href="/shop">Panier</a></li>
                                     <li th:if="${user?.get('name') == 'maxime.rossbach@std.heh.be'}"><a href="/addmanga">Ajouter</a></li>
                                     <li th:if="${user?.get('name') == 'axel.hoffmann@std.heh.be'}"><a href="/addmanga">Ajouter</a></li>
                                     <li sec:authorize="!isAuthenticated()"><a th:href="@{/oauth2/authorization/auth0}">Login</a></li>

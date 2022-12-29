@@ -28,6 +28,7 @@ public class MangaController {
     private final ModifyMangaUser modifyMangaUser;
     private final AddShop addShop;
 
+
     private List<Manga> mangas;
 
     @GetMapping("/")
@@ -108,6 +109,22 @@ public class MangaController {
         else{
             return false;
         }
+    }
+
+    @GetMapping("/shop")
+    public String mangaShop(Model model, @AuthenticationPrincipal OidcUser principal){
+        mangas = mangaListUseCase.getMangaList();
+        model.addAttribute("mangas",mangas);
+
+        return "shop";
+    }
+
+    @GetMapping("/enlever")
+    public String deleteToPanier(Integer id, Model model, @AuthenticationPrincipal OidcUser principal){
+
+        addShop.addShopDB(id);
+
+        return "redirect:/shop";
     }
     
 

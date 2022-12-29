@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RequiredArgsConstructor
-public class MangaPersistenceAdaptater implements MangaListUseCase, AddMangaUseCase, DeleteMangaUseCase, ModifyMangaUser, AddShop {
+public class MangaPersistenceAdaptater implements MangaListUseCase, AddMangaUseCase, DeleteMangaUseCase, ModifyMangaUser, AddShop{
 
     private final MangaRepository mangaRepository;
 
@@ -49,4 +49,6 @@ public class MangaPersistenceAdaptater implements MangaListUseCase, AddMangaUseC
     public void updateManga(Manga manga) {
         mangaRepository.save(mangaMapper.ObjectToEntityID(manga));
     }
-}
+
+    }
+
